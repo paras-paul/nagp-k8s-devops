@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecommerce-public-api-1-deployment
+  namespace: nagp
   labels:
     app: ecommerce-public-api-1
 spec:
