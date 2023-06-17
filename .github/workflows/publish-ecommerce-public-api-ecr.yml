@@ -1,4 +1,4 @@
-name: Publish Docker Image to ECR
+name: Publish Public Api Docker Image to ECR
 
 on:
   push:
