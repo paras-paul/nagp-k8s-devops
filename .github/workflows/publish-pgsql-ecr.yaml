@@ -1,4 +1,4 @@
-name: Push PgSql Docker Image to ECR
+name: 4. Push PgSql Docker Image to ECR
 
 on:
   push:
