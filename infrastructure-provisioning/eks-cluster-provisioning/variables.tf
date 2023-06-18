@@ -10,5 +10,5 @@ variable "region" {
 variable "cluster_name" {
   description = "value"
   type = string
-  default = "nagp-k8s-devops-assessment"
+  default = "nagp-k8s-devops-assessment-v1"
 }

@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
-string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+string connectionString = $"User ID ={Environment.GetEnvironmentVariable("username")};Password={Environment.GetEnvironmentVariable("password")};Server={Environment.GetEnvironmentVariable("pgclusterip")};Port={Environment.GetEnvironmentVariable("pgport")};Database={Environment.GetEnvironmentVariable("pgdatabase")}; Integrated Security=true;Pooling=true;";
 
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApiDbContext>(opt =>
         opt.UseNpgsql(connectionString));

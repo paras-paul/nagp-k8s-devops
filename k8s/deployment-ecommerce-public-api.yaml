@@ -1,40 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecommerce-public-api-1-deployment
+  name: ecommerce-public-api-deployment
   namespace: nagp
   labels:
-    app: ecommerce-public-api-1
+    app: ecommerce-public-api
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: ecommerce-public-api-1
+      app: ecommerce-public-api
   template:
     metadata:
       labels:
-        app: ecommerce-public-api-1
+        app: ecommerce-public-api
     spec:
       containers:
-        - name: ecommerce-public-api-1
+        - name: ecommerce-public-api
           image: 052758471237.dkr.ecr.ap-south-1.amazonaws.com/nagp-k8s-devops-assessment/ecommerce-public-api:latest
           ports:
             - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: api-configmap
           env:
-            - name: DB_CONNECTION_STRING
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: pgsql-secret
-                  key: dbconnstring
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgsql-secret
+                  key: password
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ecommerce-public-api-1-clusterip
+  name: ecommerce-public-api-clusterip
+  namespace: nagp
 spec:
   selector:
-    app: ecommerce-public-api-1
+    app: ecommerce-public-api
   ports:
     - protocol: TCP
       port: 5001

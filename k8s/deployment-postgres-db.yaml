@@ -24,6 +24,7 @@ spec:
     metadata:
       labels:
         app: postgres
+      namespace: nagp
     spec:
       containers:
       - name: postgres
@@ -49,7 +50,9 @@ spec:
       - name: postgres-data
         persistentVolumeClaim:
           claimName: postgres-pvc-1
-      restartPolicy: Always      
+      restartPolicy: Always  
+  strategy:
+    type: Recreate    
 ---
 apiVersion: v1
 kind: Service
