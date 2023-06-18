@@ -37,5 +37,19 @@ namespace public_api_interface.Controllers
             var dbContext = new ApiDbContext(_options);
             return dbContext.Products;
         }
+
+        [HttpPost]
+        [Route("AddProduct")]
+        public async Task<Product> AddProductAsync(Product product)
+        {
+            var dbContext = new ApiDbContext(_options);
+            var response = await dbContext.Products.AddAsync(product);
+            var saveResp = dbContext.SaveChanges();
+            if(saveResp == 1)
+            {
+                return product;
+            }
+            return null;
+        }
     }
 }
