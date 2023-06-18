@@ -11,6 +11,7 @@ module "eks" {
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
+  manage_aws_auth_configmap = true
   
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
@@ -67,17 +68,4 @@ resource "aws_eks_addon" "ebs-csi" {
   }
 }
 
-resource "kubernetes_storage_class_v1" "gp3-enc" {
-  depends_on = [ aws_eks_addon.ebs-csi ]
-  metadata {
-    name = "gp3-enc"
-  }
-  storage_provisioner = "ebs.csi.aws.com"
-  volume_binding_mode = "WaitForFirstConsumer"
-  allow_volume_expansion = true
-  parameters = {
-    "encrypted" = "true"
-    "fsType" = "ext4"
-    "type" = "gp3"
-  }
-}
+
