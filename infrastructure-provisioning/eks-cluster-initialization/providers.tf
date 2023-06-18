@@ -3,11 +3,11 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-  config_path    = "C:\\Users\\paulp\\.kube\\config"
+  config_path    = "$HOME/.kube/config"
 }
 
 provider "helm" {
   kubernetes {
-    config_path    = "C:\\Users\\paulp\\.kube\\config"
+    config_path    = "$HOME/.kube/config"
   }
 }
