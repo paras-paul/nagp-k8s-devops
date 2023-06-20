@@ -54,6 +54,5 @@ jobs:
         IMAGE_TAG: ${{ github.ref_name }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
-        docker tag $ECR_REGISTRY/$ECR_REPOSITORY $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker push $public.ecr.aws/i8i2q6x3/nagp-k8s-devops-assessment/ecommerce-public-api:$IMAGE_TAG
+        docker tag nagp-k8s-devops-assessment/ecommerce-public-api:latest public.ecr.aws/i8i2q6x3/nagp-k8s-devops-assessment/ecommerce-public-api:latest
         docker push public.ecr.aws/i8i2q6x3/nagp-k8s-devops-assessment/ecommerce-public-api:latest
