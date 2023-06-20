@@ -54,6 +54,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}         
         IMAGE_TAG: ${{ github.ref_name }}
       run: |
-        docker build -t $ECR_REPOSITORY .
-        docker tag postgres-custom:latest public.ecr.aws/i8i2q6x3/postgres-custom:latest
-        docker push public.ecr.aws/i8i2q6x3/postgres-custom:latest
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY
